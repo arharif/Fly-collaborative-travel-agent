@@ -141,6 +141,47 @@ The [interactive Academy](https://arharif.github.io/Fly-collaborative-travel-age
 
 ---
 
+
+---
+
+## ☁️ AI × Cloud Infrastructure Architecture
+
+**FLY Travel AI Agent — Secure, scalable, cloud-powered intelligence.**
+
+FLY combines a conversational travel experience with AI agent orchestration and managed cloud inference. The application is hosted on **Hugging Face PRO**, powered by **Gradio and Python**, and integrates **DeepSeek V3.2 through AWS Bedrock**.
+
+<div align="center">
+
+<a href="docs/assets/FLY_AWS_Cloud_Infrastructure_Architecture.png">
+  <img
+    src="docs/assets/FLY_AWS_Cloud_Infrastructure_Architecture.png"
+    alt="FLY Travel AI Agent — AWS Cloud Infrastructure Architecture"
+    width="100%"
+  />
+</a>
+
+<sub>Figure 01 — FLY AI × Cloud Infrastructure Architecture</sub>
+
+</div>
+
+### ⚡ Architecture at a Glance
+
+| Layer | Technology | Responsibility |
+|:---|:---|:---|
+| 🌐 **Experience** | Hugging Face PRO · Gradio | Interactive travel dashboard and chatbot |
+| ⚙️ **Application** | Python · `app.py` | Request processing, session management and responses |
+| 🤖 **AI Agent** | Smolagents · CodeAgent | Orchestration, tool usage and personalization |
+| 🧠 **Intelligence** | LiteLLM · AWS Bedrock · DeepSeek V3.2 | Model inference and travel recommendations |
+| 🔐 **Security** | AWS IAM · Space Secrets | Access control and secure credentials |
+| 🗺️ **Enrichment** | Wikipedia · Wikimedia · Google Maps | Destination information, images and links |
+| 🚀 **Delivery** | Google Colab · GitHub · Hugging Face | Development, version control and deployment |
+
+### 🔄 Request Flow
+
+**Traveler → Gradio → Python → Smolagents → LiteLLM → AWS Bedrock → DeepSeek V3.2 → Personalized Travel Experience**
+
+---
+
 <div align="center">
 
 **Learn the architecture. Build the experience. Ship responsibly.**
