@@ -50,12 +50,6 @@
 
 <br>
 
-<sub>
-  <a href="https://arharif.github.io/about-x1">
-    © arharif
-  </a>
-</sub>
-
 </div>
 
 
