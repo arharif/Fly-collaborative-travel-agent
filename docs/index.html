@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6e5ed">
+<script>try{let t=localStorage.getItem("fly-academy-theme-v2");if(["rose","black","king-green"].includes(t))document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>FLY Academy · From Zero to Deployment</title>
+<meta name="description" content="An animated, comprehensive step-by-step tutorial to build an AI travel agent with AWS Bedrock DeepSeek V3.2, Smolagents, Gradio, Colab and Hugging Face PRO.">
+<style>
+:root{--blush:#f7e7ee;--blush2:#f1cde0;--black:#181519;--muted:#746770;--line:#e6d8e1;--paper:#fffbfd;--dark:#221a20;--berry:#8c315e;--mint:#d4f3e5}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:38px}body{margin:0;color:var(--black);background:#faf5f8;font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.55}a{color:var(--berry);text-decoration-thickness:1px;text-underline-offset:3px}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b0447b;outline-offset:3px}
+#scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:#bd578d;z-index:999;transition:width .15s}
+.shell{display:grid;grid-template-columns:278px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;overflow:auto;background:#f4e6ec;border-right:1px solid #e4d1da;padding:23px 15px 30px;scrollbar-color:#dcc1cf transparent}
+.brand{display:flex;align-items:center;gap:11px;margin:4px 8px 23px}.brand-emblem{width:45px;height:45px;border:1.5px solid #232023;border-radius:13px;display:grid;place-items:center;font-size:23px;background:#fbf3f7;transform:rotate(-7deg)}.brand strong{display:block;font-weight:850;letter-spacing:.05em;font-size:17px}.brand small{display:block;color:#816d79;font-size:11px;letter-spacing:.13em;text-transform:uppercase}
+.side-kicker{font-size:10px;letter-spacing:.19em;font-weight:800;color:#8c7482;margin:16px 10px 9px}.search-wrap{padding:0 6px 6px}.search-wrap input{width:100%;background:#fff9fc;border:1px solid #ddc8d4;border-radius:12px;padding:11px 13px;color:var(--dark);outline:none}.search-wrap input::placeholder{color:#9c8593}
+.sidebar-progress{margin:12px 7px 18px;padding:15px;background:#fff9fc;border-radius:17px;border:1px solid #e8d8e1}.sidebar-progress strong{font-size:26px;line-height:1}.sidebar-progress p{margin:3px 0 9px;color:var(--muted);font-size:11px}.mini-track{height:6px;background:#ecd9e5;border-radius:20px;overflow:hidden}.mini-fill{height:100%;width:0;background:#8c315e;border-radius:20px;transition:width .3s}
+.stage-link{display:flex;align-items:center;gap:9px;padding:10px 10px;color:#463b42;text-decoration:none;border:1px solid transparent;border-radius:12px;transition:background .25s,transform .25s,border-color .25s}.stage-link:hover{background:#fff6fa;transform:translateX(2px)}.stage-link.active{background:#fffaff;border-color:#e5cad8;color:#222}.stage-num{min-width:29px;font-variant-numeric:tabular-nums;color:#a38a98;font-weight:750;font-size:12px}.stage-title{font-size:12px;font-weight:600;flex:1}.stage-check{color:#cbb2c1;font-size:9px}.stage-link.done .stage-check{color:#2a9070}.stage-link.done .stage-num{color:#2a9070}
+.side-bottom{margin:22px 11px 5px;padding-top:16px;border-top:1px solid #e5d4de;color:#6a5b63;font-size:11px}.side-bottom a{font-weight:700}
+.main{min-width:0;max-width:1200px;width:100%;margin:auto;padding:24px clamp(18px,5vw,70px) 92px}
+.utility{display:flex;justify-content:space-between;align-items:center;margin:1px 0 21px;gap:12px}.pill{display:inline-flex;gap:7px;align-items:center;padding:8px 13px;background:white;border:1px solid #ebd8e2;border-radius:999px;font-size:11px;font-weight:750;letter-spacing:.06em}.utility-right{display:flex;gap:7px}.utility-right a{font-size:11px;text-decoration:none;font-weight:750;padding:9px 12px;background:#f2e4eb;border:1px solid #e4d0dc;border-radius:99px}.mobile-menu{display:none;background:#231a21;color:white;border:0;border-radius:12px;padding:9px 11px}
+.hero{background:linear-gradient(148deg,#f8dce9 0%,#f1e4ec 67%,#fff7fb 100%);border:1px solid #e8cbd9;border-radius:34px;padding:clamp(26px,4vw,52px);position:relative;overflow:hidden;min-height:440px;box-shadow:0 26px 60px #9c5a7815}.eyebrow{font-size:12px;letter-spacing:.19em;font-weight:850;display:flex;align-items:center;gap:9px}.eyebrow::before{content:'✦';color:#903d69;font-size:17px}.hero h1{font-size:clamp(40px,6vw,79px);line-height:1.015;letter-spacing:-.067em;max-width:730px;margin:29px 0 19px;font-weight:820}.hero h1 em{font-family:Georgia,serif;font-weight:450;letter-spacing:-.06em}.hero-desc{max-width:550px;color:#6d5c67;font-size:15px;line-height:1.6}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.primary-action,.secondary-action{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:14px;font-size:13px;font-weight:850;text-decoration:none}.primary-action{background:#181519;color:white}.secondary-action{color:#181519;background:white;border:1px solid #e5cddb}.hero-meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;color:#6b5c67;font-weight:720;font-size:11px;letter-spacing:.02em}
+.flight-path{position:absolute;right:-52px;top:47px;width:min(36vw,355px);height:300px;opacity:.75;pointer-events:none}.flight-path path{stroke:#aa6791;stroke-width:1.8;stroke-dasharray:7 10;fill:none}.plane-shape{position:absolute;right:90px;top:76px;animation:floatplane 5s ease-in-out infinite;transform-origin:center;font-size:67px;filter:drop-shadow(0 5px 8px #7d456b22)}@keyframes floatplane{0%,100%{transform:translate(0,0) rotate(-22deg)}50%{transform:translate(-19px,18px) rotate(-5deg)}}
+.stat-bar{margin:18px 0 35px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{border:1px solid var(--line);background:white;border-radius:18px;padding:18px 17px}.stat strong{display:block;font-size:26px;line-height:1.1}.stat small{color:var(--muted);font-size:11px}
+.flow-map{margin:30px 0 42px;border:1px solid var(--line);background:#fff;border-radius:23px;padding:22px}.flow-map .flow-heading{font-size:11px;letter-spacing:.13em;font-weight:850;color:#806778;margin-bottom:16px}.flow-nodes{display:flex;align-items:stretch;gap:9px;flex-wrap:wrap}.flow-node{flex:1 1 115px;border-radius:15px;padding:13px;background:#f9eef4;text-align:center;border:1px solid #ecd6e1}.flow-node b{display:block;font-size:12px}.flow-node small{font-size:10px;color:#7e6975}.flow-arrow{align-self:center;color:#b07496}
+.chapter{scroll-margin-top:15px;background:#fff;border:1px solid var(--line);border-radius:27px;margin:25px 0 36px;box-shadow:0 11px 29px #5d39480a;overflow:hidden;transition:box-shadow .3s}.chapter:target{box-shadow:0 0 0 2px #e1aac5,0 22px 50px #8c567018}.chapter-accent{display:flex;align-items:center;gap:15px;padding:19px 26px;background:#fbedf4;border-bottom:1px solid #e9dce3}.chapter-num{font-size:19px;font-weight:880;letter-spacing:-.04em}.chapter-caption{font-size:11px;color:#8d647b;letter-spacing:.14em;font-weight:850;flex:1}.done-button{border:1px solid #dcbdd0;border-radius:99px;background:#fff;color:#72415f;padding:8px 13px;font-size:11px;font-weight:800;transition:all .2s}.done-button[aria-pressed="true"]{background:#e6f4ee;border-color:#abdbc8;color:#23664c}
+.prose{padding:28px clamp(20px,4vw,38px);font-size:14px}.prose h2{font-size:clamp(24px,3.3vw,35px);line-height:1.18;letter-spacing:-.038em;margin:0 0 24px}.prose h3{font-size:19px;margin-top:30px;letter-spacing:-.02em}.prose h4{font-size:15px}.prose p{max-width:76ch;color:#4d414a}.prose li{margin:7px 0;max-width:86ch}.prose table{border-collapse:collapse;width:100%;font-size:12px;margin:20px 0;display:block;overflow-x:auto}.prose th{background:#f8ecf2;text-align:left;color:#513646;font-weight:800;white-space:nowrap}.prose td,.prose th{border:1px solid #eadbe2;padding:10px 12px;vertical-align:top;min-width:110px}.prose blockquote{margin:19px 0;border-left:3px solid #bf7199;padding:5px 18px;background:#fcf4f8;border-radius:0 10px 10px 0}.prose blockquote p{color:#695461}.prose pre{position:relative;background:#231d25;color:#f3eaf0;border-radius:16px;overflow:auto;padding:20px 18px;margin:16px 0 25px;max-height:540px;font-size:12px;line-height:1.65}.prose code{font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;font-size:.87em}.prose :not(pre)>code{background:#f5eaf0;padding:2px 5px;border-radius:5px;color:#8a315d}.prose pre code{color:inherit}.prose hr{border:0;border-top:1px solid #e8dbe2;margin:30px 0}.copy-code{position:absolute;right:12px;top:11px;border:1px solid #736474;border-radius:8px;background:#403443;color:#fff;padding:5px 10px;font-size:11px}.prose a{overflow-wrap:anywhere}.prose img{max-width:100%}
+.chapter-bottom{padding:0 29px 24px;display:flex;justify-content:flex-end}.next-step{font-size:12px;font-weight:800;color:#703d5b;padding:11px 15px;text-decoration:none;background:#faedf3;border:1px solid #ead9e3;border-radius:999px}.next-step span{padding-left:8px}
+footer{padding:30px 10px;text-align:center;color:#897580;font-size:12px}footer a{color:#77455f}details{background:#fdf5fa;border:1px solid #eedee7;border-radius:12px;padding:12px 14px;margin:15px 0}
+@media(max-width:980px){.shell{grid-template-columns:1fr}.side{position:fixed;top:0;left:0;bottom:0;height:100vh;width:280px;z-index:80;transform:translateX(-110%);transition:transform .3s;box-shadow:18px 0 45px #24182018}.side.show{transform:translateX(0)}.mobile-menu{display:inline-flex}.main{padding:18px 16px 60px}.hero{min-height:400px}.flight-path{opacity:.22}.stat-bar{gap:9px}.stat{padding:13px}.utility-right a{font-size:10px}}
+@media(max-width:550px){.hero{border-radius:25px;padding:28px 23px;min-height:430px}.hero h1{font-size:46px}.hero-desc{font-size:13px}.flight-path{display:none}.stat-bar{grid-template-columns:1fr 1fr}.stat:nth-child(3){grid-column:span 2}.flow-arrow{display:none}.chapter{border-radius:20px}.chapter-accent{padding:14px 16px}.prose{padding:23px 19px}.chapter-caption{font-size:9px;letter-spacing:.07em}.done-button{font-size:10px;padding:6px 8px}.utility-right a:first-child{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+<link rel="stylesheet" href="assets/themes.css">
+</head>
+<body>
+<div id="scroll-progress" aria-hidden="true"></div>
+<div class="shell">
+<aside class="side" id="sidebar" aria-label="Tutorial navigation">
+  <div class="brand"><div class="brand-emblem">✈</div><div><strong>FLY ACADEMY</strong><small>Complete build journey</small></div></div>
+  <div class="search-wrap"><input id="stage-search" type="search" aria-label="Filter stages" placeholder="Search 26 stages…"></div>
+  <div class="sidebar-progress"><strong id="completed-count">0 / 26</strong><p>Stages marked complete</p><div class="mini-track"><div class="mini-fill" id="completed-progress"></div></div></div>
+  <div class="side-kicker">CURRICULUM / 26 STAGES</div><nav id="stage-nav"><a class="stage-link" href="#stage-00" data-stage="0" aria-label="Stage 00 Understand what we are creating"><span class="stage-num">00</span><span class="stage-title">Architecture</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-01" data-stage="1" aria-label="Stage 01 Accounts, services, prerequisites"><span class="stage-num">01</span><span class="stage-title">Accounts</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-02" data-stage="2" aria-label="Stage 02 Choose the AWS region and inspect the model"><span class="stage-num">02</span><span class="stage-title">Model &amp; region</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-03" data-stage="3" aria-label="Stage 03 Create a dedicated least-privilege IAM identity"><span class="stage-num">03</span><span class="stage-title">IAM permissions</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-04" data-stage="4" aria-label="Stage 04 Activate cost and security guardrails BEFORE making requests"><span class="stage-num">04</span><span class="stage-title">Cost guardrails</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-05" data-stage="5" aria-label="Stage 05 Get this GitHub project into your account"><span class="stage-num">05</span><span class="stage-title">GitHub project</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-06" data-stage="6" aria-label="Stage 06 Open the reproducible Colab notebook"><span class="stage-num">06</span><span class="stage-title">Open Colab</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-07" data-stage="7" aria-label="Stage 07 Install Python dependencies in Colab"><span class="stage-num">07</span><span class="stage-title">Dependencies</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-08" data-stage="8" aria-label="Stage 08 Add AWS credentials to Colab Secrets"><span class="stage-num">08</span><span class="stage-title">Colab secrets</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-09" data-stage="9" aria-label="Stage 09 Validate AWS authentication separately from authorization"><span class="stage-num">09</span><span class="stage-title">AWS identity</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-10" data-stage="10" aria-label="Stage 10 Make the first real DeepSeek V3.2 request"><span class="stage-num">10</span><span class="stage-title">Model test</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-11" data-stage="11" aria-label="Stage 11 Understand LiteLLM and the `stopSequences` fix"><span class="stage-num">11</span><span class="stage-title">Stop fix</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-12" data-stage="12" aria-label="Stage 12 Smolagents CodeAgent and tools (how the backend thinks)"><span class="stage-num">12</span><span class="stage-title">Agent internals</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-13" data-stage="13" aria-label="Stage 13 Understand the professor&#x27;s notebook, cell by cell"><span class="stage-num">13</span><span class="stage-title">Professor notebook</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-14" data-stage="14" aria-label="Stage 14 R1–R4: what changed in the redesigned human–AI interaction"><span class="stage-num">14</span><span class="stage-title">Human–AI UX</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-15" data-stage="15" aria-label="Stage 15 The Gradio UI: interface and event wiring"><span class="stage-num">15</span><span class="stage-title">Gradio frontend</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-16" data-stage="16" aria-label="Stage 16 Images, links and cautious factual claims"><span class="stage-num">16</span><span class="stage-title">Images &amp; links</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-17" data-stage="17" aria-label="Stage 17 Local end-to-end test before hosting"><span class="stage-num">17</span><span class="stage-title">Local verification</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-18" data-stage="18" aria-label="Stage 18 Create the Hugging Face fine-grained token"><span class="stage-num">18</span><span class="stage-title">HF token</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-19" data-stage="19" aria-label="Stage 19 Create a real Gradio Space using PRO"><span class="stage-num">19</span><span class="stage-title">Gradio Space</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-20" data-stage="20" aria-label="Stage 20 Configure Hugging Face Space Secrets (different from Colab)"><span class="stage-num">20</span><span class="stage-title">Space secrets</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-21" data-stage="21" aria-label="Stage 21 Publish files through Google Colab (no manual ZIP surgery)"><span class="stage-num">21</span><span class="stage-title">Publish source</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-22" data-stage="22" aria-label="Stage 22 Deployment health, log triage, costs and updates"><span class="stage-num">22</span><span class="stage-title">Operate safely</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-23" data-stage="23" aria-label="Stage 23 Put the animated documentation on GitHub Pages"><span class="stage-num">23</span><span class="stage-title">GitHub Pages</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-24" data-stage="24" aria-label="Stage 24 Your assignment&#x27;s scientific evaluation: baseline vs improved"><span class="stage-num">24</span><span class="stage-title">Assignment evidence</span><span class="stage-check" aria-hidden="true">●</span></a><a class="stage-link" href="#stage-25" data-stage="25" aria-label="Stage 25 Final delivery, demonstration, and maintenance"><span class="stage-num">25</span><span class="stage-title">Final delivery</span><span class="stage-check" aria-hidden="true">●</span></a></nav>
+  <div class="side-bottom">26 guided stages · zero to deployment<p>Model: DeepSeek V3.2 · AWS Bedrock<br>UI: Gradio · Hosting: HF PRO</p><a href="TUTORIAL_FROM_ZERO.md">Plain Markdown tutorial ↗</a></div>
+</aside>
+<main class="main" id="main">
+  <div class="utility"><button type="button" class="mobile-menu" id="menu-btn" aria-expanded="false" aria-controls="sidebar">☰ Chapters</button><span class="pill">✦ LEARN · BUILD · SHIP</span><div class="theme-switcher" role="group" aria-label="Color theme"><span class="theme-label">Theme</span><button type="button" class="theme-choice" data-theme-option="rose" data-theme-label="Rose" aria-label="Use Rose theme" aria-pressed="true"><span class="theme-dot" aria-hidden="true"></span>Rose</button><button type="button" class="theme-choice" data-theme-option="black" data-theme-label="Onyx Black" aria-label="Use Onyx Black theme" aria-pressed="false"><span class="theme-dot" aria-hidden="true"></span>Onyx</button><button type="button" class="theme-choice" data-theme-option="king-green" data-theme-label="King Green" aria-label="Use King Green theme" aria-pressed="false"><span class="theme-dot" aria-hidden="true"></span>King Green</button></div><div class="utility-right"><a id="notebook-repo-link" href="../notebooks/FLY_From_Zero_to_Hugging_Face_PRO.ipynb">Colab file ↗</a><a id="app-repo-link" href="../space/app.py">Source code ↗</a></div></div>
+  <header class="hero" id="top"><svg class="flight-path" viewBox="0 0 370 320"><path d="M10 270 C220 270,90 60,350 20"/></svg><div class="plane-shape" aria-hidden="true">✈</div><div class="eyebrow">FLY / BUILD A REAL AI AGENT</div><h1>From <em>zero</em><br>to deployed.</h1><p class="hero-desc">A complete, interactive engineering journey. Configure AWS, build an intelligent travel concierge, create a refined pink chatbot, deploy to Hugging Face PRO, and publish the entire project on GitHub.</p><div class="hero-actions"><a class="primary-action" href="#stage-00">Begin your journey ↗</a><a class="secondary-action" href="COMPLETE_TECHNICAL_REFERENCE.pdf">Read the technical handbook ↓</a></div><div class="hero-meta"><span>26 guided stages</span><span>·</span><span>Step-by-step AWS console</span><span>·</span><span>Production-aware deployment</span></div></header>
+  <div class="stat-bar"><div class="stat"><strong>26</strong><small>Learning stages</small></div><div class="stat"><strong>5</strong><small>Connected platforms</small></div><div class="stat"><strong>1</strong><small>Deployable agent package</small></div></div>
+  <div class="flow-map"><div class="flow-heading">HOW FLY WORKS · REAL REQUEST PATH</div><div class="flow-nodes"><div class="flow-node"><b>Traveler</b><small>Web browser</small></div><div class="flow-arrow">→</div><div class="flow-node"><b>Gradio</b><small>Pink UI + state</small></div><div class="flow-arrow">→</div><div class="flow-node"><b>Smolagents</b><small>Tools + prompts</small></div><div class="flow-arrow">→</div><div class="flow-node"><b>LiteLLM</b><small>API adaptation</small></div><div class="flow-arrow">→</div><div class="flow-node"><b>Bedrock</b><small>DeepSeek V3.2</small></div></div></div>
+  <section class="chapter" id="stage-00" data-index="0"><div class="chapter-accent"><span class="chapter-num">00</span><span class="chapter-caption">MISSION / ARCHITECTURE</span><button type="button" class="done-button" data-mark="0" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 00 — Understand what we are creating</h2>
+<p>A typical LLM is a model you ask to produce text. An <strong>agent</strong> is a model wrapped with instructions, action tools, and an execution loop. FLY's <code>CodeAgent</code> can decide when to use search tools; those tools are not separate LLMs. <strong>Gradio</strong> collects preferences and displays results; <strong>AWS Bedrock</strong> hosts the DeepSeek model; <strong>Hugging Face Spaces</strong> hosts the Python user interface, <strong>not the model</strong>. GitHub stores source code and static documentation.</p>
+<h3>Two execution environments</h3>
+<table>
+<thead>
+<tr>
+  <th>Environment</th>
+  <th>Code used</th>
+  <th>Secret source</th>
+  <th>Lifecycle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Google Colab</td>
+  <td>Notebook and optional imported <code>space/app.py</code></td>
+  <td><strong>Colab Secrets</strong></td>
+  <td>Exists while Colab runtime remains active</td>
+</tr>
+<tr>
+  <td>Hugging Face PRO Space</td>
+  <td><code>space/app.py</code>, <code>space/agent_backend.py</code>, dependencies</td>
+  <td><strong>Space Secrets</strong></td>
+  <td>Independent hosted build; may sleep/restart</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical:</strong> Colab's Python variables and Colab Secrets do <em>not</em> transfer automatically to Hugging Face. You must configure the Space separately.</p>
+<h3>High-level architecture</h3>
+<pre><code class="language-mermaid">flowchart TD
+ A[Traveler / Browser] --&gt; B[Gradio Pink Dashboard]
+ B --&gt; C[Per-session state and history]
+ C --&gt; D[Smolagents CodeAgent]
+ D --&gt; E[LiteLLM adapter]
+ E --&gt; F[AWS Bedrock runtime]
+ F --&gt; G[DeepSeek V3.2 model]
+ G --&gt; F --&gt; E --&gt; D
+ D --&gt; H[Markdown itinerary or focused answer]
+ H --&gt; I[Photo and place enrichment]
+ I --&gt; J[Wikipedia / Wikimedia and Google Maps links]
+ J --&gt; B
+ H --&gt; B
+ K[Space Secrets] -.-&gt; E
+ L[GitHub repository] -.-&gt; M[HF Gradio Space source files]
+ M -.-&gt; B
+</code></pre>
+<p><strong>Expected result:</strong> you can explain why a model's success in Colab does not imply the Hugging Face application is running.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-01" class="next-step" >Continue to stage 01 <span>↗</span></a></div></section><section class="chapter" id="stage-01" data-index="1"><div class="chapter-accent"><span class="chapter-num">01</span><span class="chapter-caption">MISSION / ACCOUNTS</span><button type="button" class="done-button" data-mark="1" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 01 — Accounts, services, prerequisites</h2>
+<p><strong>You need:</strong></p>
+<ul>
+<li>Google account for <a href="https://colab.research.google.com/">Google Colab</a>, Python familiarity not required.</li>
+<li>AWS account with billing access and permission to use Amazon Bedrock (and IAM to manage an identity). Console: <a href="https://console.aws.amazon.com/">AWS</a>.</li>
+<li>A <a href="https://huggingface.co/">Hugging Face</a> account with <strong>PRO</strong> for regular CPU-hosted Gradio Space creation, and an access token with write permission to your user namespace.</li>
+<li>A <a href="https://github.com/">GitHub</a> account to upload and share the source.</li>
+<li>A browser. Do not install a GPU locally; the model is remote.</li>
+</ul>
+<p><strong>Charges:</strong> AWS Bedrock inference is billed by AWS; CPU Basic hosting has no hourly hardware charge but currently requires an eligible paid Hugging Face plan for Gradio Spaces. Always check the current price pages rather than assuming a fixed monthly bill. Never publish unrestricted AWS-backed inference publicly without controls.</p>
+<p><strong>Checkpoint 01:</strong> Can you log into all four services? If not, fix the missing account before continuing.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-02" class="next-step" >Continue to stage 02 <span>↗</span></a></div></section><section class="chapter" id="stage-02" data-index="2"><div class="chapter-accent"><span class="chapter-num">02</span><span class="chapter-caption">MISSION / MODEL &AMP; REGION</span><button type="button" class="done-button" data-mark="2" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 02 — Choose the AWS region and inspect the model</h2>
+<ol>
+<li>Go to the <strong>AWS Console</strong> and sign in with your authorized IAM identity. Use the upper-right region selector; select <strong>US East (N. Virginia), <code>us-east-1</code></strong> as in this project's tested configuration.</li>
+<li>In the console search bar, find <strong>Amazon Bedrock</strong> and open it.</li>
+<li>In the model catalog, find <strong>DeepSeek V3.2</strong> and confirm regional availability and any account onboarding requirements; current model access can involve AWS Marketplace auto-enablement/terms for some third-party models. An IAM inference policy is still required.</li>
+<li>Record these strings in your personal setup notes (not secret):</li>
+</ol>
+<pre><code class="language-text">AWS_REGION       = us-east-1
+Bedrock model ID = deepseek.v3.2
+LiteLLM model ID = bedrock/deepseek.v3.2
+</code></pre>
+<p><strong>Why the prefix differs:</strong> AWS Bedrock expects <code>deepseek.v3.2</code> as the Bedrock <code>modelId</code>; LiteLLM adds <code>bedrock/</code> to select the provider integration.</p>
+<p><strong>Checkpoint 02:</strong> You can find the model in the Bedrock documentation and explain the two identifiers. Documentation: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-deepseek-deepseek-v3-2.html">https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-deepseek-deepseek-v3-2.html</a></p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-03" class="next-step" >Continue to stage 03 <span>↗</span></a></div></section><section class="chapter" id="stage-03" data-index="3"><div class="chapter-accent"><span class="chapter-num">03</span><span class="chapter-caption">MISSION / IAM PERMISSIONS</span><button type="button" class="done-button" data-mark="3" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 03 — Create a dedicated least-privilege IAM identity</h2>
+<p><strong>Why:</strong> AWS credentials let software call AWS APIs. Use a <strong>dedicated IAM principal</strong>, not your AWS account's root keys and not an administrator's key. AWS recommends short-lived role-based credentials where practical; static IAM access keys are a compromise for a beginner educational demo and should be rotated and restricted.</p>
+<p><strong>Console procedure</strong> (field names may shift as the console evolves):</p>
+<ol>
+<li>In the AWS search bar open <strong>IAM</strong> (Identity and Access Management).</li>
+<li>Select <strong>Users</strong> → <strong>Create user</strong>. Choose a clear name such as <code>fly-bedrock-demo</code>. Do not grant console access unless you specifically need it.</li>
+<li>Open that user's <strong>Permissions</strong> tab → <strong>Add permissions</strong> → <strong>Create inline policy</strong> → <strong>JSON</strong> (or create a customer-managed policy and attach it). Paste the policy below:</li>
+</ol>
+<pre><code class="language-json">{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Sid&quot;: &quot;InvokeOnlyFlyDeepSeekV32&quot;,
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;bedrock:InvokeModel&quot;,
+        &quot;bedrock:InvokeModelWithResponseStream&quot;
+      ],
+      &quot;Resource&quot;: &quot;arn:aws:bedrock:us-east-1::foundation-model/deepseek.v3.2&quot;
+    }
+  ]
+}
+</code></pre>
+<ol start="4">
+<li>Name the policy <code>FlyDeepSeekV32InvokeOnly</code>; review and create. If a particular model invocation path uses a different resource type (for instance a provisioned model or inference profile), follow AWS's current IAM guidance instead of indiscriminately changing the resource to <code>*</code>.</li>
+<li>Open <strong>Users → fly-bedrock-demo → Security credentials → Create access key</strong>, select an appropriate use case, and acknowledge AWS's guidance. Save both parts securely: <strong>Access key ID</strong> and <strong>Secret access key</strong>. The secret is normally displayed once. Never show it in a screenshot or notebook output.</li>
+<li>If you later rotate the credentials, update both Colab Secrets and Hugging Face Space Secrets together.</li>
+</ol>
+<p><strong>Permission distinction:</strong> This policy is for <em>inference</em>. <code>sts:GetCallerIdentity</code> generally works without a separate explicit allow; the STS test below confirms credential validity, not Bedrock authorization.</p>
+<p><strong>Checkpoint 03:</strong> You have a dedicated IAM identity, a model-specific policy, and a securely stored credential pair. Do not paste them in GitHub, prompts, screenshots, or chats.</p>
+<p>Official references: <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html">https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html</a></p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-04" class="next-step" >Continue to stage 04 <span>↗</span></a></div></section><section class="chapter" id="stage-04" data-index="4"><div class="chapter-accent"><span class="chapter-num">04</span><span class="chapter-caption">MISSION / COST GUARDRAILS</span><button type="button" class="done-button" data-mark="4" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 04 — Activate cost and security guardrails BEFORE making requests</h2>
+<ol>
+<li>From AWS, open <strong>Billing and Cost Management → Budgets → Create budget</strong>. Choose a cost budget in a currency/amount suitable for your course and set notification emails at one or more thresholds. Budgets can be delayed, so an alert is <strong>not</strong> a hard spending cap.</li>
+<li>Optionally apply AWS service quotas and resource restrictions appropriate for your use. Limit app traffic, keep the Space private at first, enable a Gradio password and monitor usage.</li>
+<li>Store your access keys in <strong>Colab Secrets</strong> and <strong>HF Secrets</strong>, not in <code>.env.example</code>, Python files, notebooks, GitHub Issues or GitHub Actions logs.</li>
+<li>Enable MFA on the AWS identity you use to administer the account. Rotate keys immediately if exposed.</li>
+</ol>
+<p><strong>Checkpoint 04:</strong> Alerts configured; you understand that a private Space and a password are access barriers, not guarantees of billing protection.</p>
+<p>Official reference: <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html">https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html</a></p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-05" class="next-step" >Continue to stage 05 <span>↗</span></a></div></section><section class="chapter" id="stage-05" data-index="5"><div class="chapter-accent"><span class="chapter-num">05</span><span class="chapter-caption">MISSION / GITHUB PROJECT</span><button type="button" class="done-button" data-mark="5" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 05 — Get this GitHub project into your account</h2>
+<p><strong>Option A — Browser upload (beginner-friendly):</strong></p>
+<ol>
+<li>Open <a href="https://github.com/new">GitHub → New repository</a>.</li>
+<li>Name it <code>fly-collaborative-travel-agent</code>. Choose <strong>Private</strong> while reviewing the files; publish later if appropriate. <strong>Do not initialize with a README</strong> if you are uploading this prepared package.</li>
+<li>Create the repository. Click <strong>uploading an existing file</strong> (or <strong>Add file → Upload files</strong> on the Code tab). <strong>Extract the ZIP on your computer</strong>. Drag the <em>contents</em> of the extracted folder—not the ZIP alone—onto the GitHub upload area. GitHub's web uploader may have per-file/count limits; use Git if the browser refuses a large folder upload.</li>
+<li>Confirm that <code>space/</code>, <code>notebooks/</code>, <code>docs/</code> and <code>.github/</code> appear in the repository. Commit the upload. If dotfiles didn't upload, add <code>.gitignore</code> separately.</li>
+</ol>
+<p><strong>Option B — Git command line</strong> (if comfortable):</p>
+<pre><code class="language-bash">cd FLY_Zero_to_Deployment_GitHub
+git init
+git add .
+git commit -m &quot;Initial Fly travel agent tutorial and app&quot;
+git branch -M main
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/fly-collaborative-travel-agent.git
+git push -u origin main
+</code></pre>
+<p>If the remote repo is already initialized, pull/reconcile rather than force pushing. GitHub authentication may require its credential manager or an approved token; do not put tokens in the Git URL or shell history.</p>
+<p><strong>Checkpoint 05:</strong> You can open GitHub and see both the notebook file and <code>space/app.py</code>.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-06" class="next-step" >Continue to stage 06 <span>↗</span></a></div></section><section class="chapter" id="stage-06" data-index="6"><div class="chapter-accent"><span class="chapter-num">06</span><span class="chapter-caption">MISSION / OPEN COLAB</span><button type="button" class="done-button" data-mark="6" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 06 — Open the reproducible Colab notebook</h2>
+<ol>
+<li>In GitHub navigate to <code>notebooks/FLY_From_Zero_to_Hugging_Face_PRO.ipynb</code>.</li>
+<li>Open in Colab via GitHub's notebook link or paste this pattern into your browser:</li>
+</ol>
+<pre><code class="language-text">https://colab.research.google.com/github/YOUR_GITHUB_USERNAME/fly-collaborative-travel-agent/blob/main/notebooks/FLY_From_Zero_to_Hugging_Face_PRO.ipynb
+</code></pre>
+<ol start="3">
+<li>Choose <strong>File → Save a copy in Drive</strong> if you want to edit it without changing the GitHub version.</li>
+<li>In the first configuration code cell, change <code>GITHUB_USERNAME</code> and <code>GITHUB_REPOSITORY</code> to your real values. The notebook will clone your repository into the temporary Colab filesystem. If the repository is private, cloning needs authorized GitHub credentials; <strong>do not paste a GitHub personal token into public notebook code</strong>. A temporary, reviewed public repo is simpler for this beginner exercise, or upload the package from your device instead.</li>
+<li>Runtime → <strong>Change runtime type</strong> → CPU (GPU not required), then run the notebook cells <strong>in order</strong>.</li>
+</ol>
+<p><strong>Checkpoint 06:</strong> The first verification cell prints the path to <code>space/app.py</code> and <code>space/requirements.txt</code>.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-07" class="next-step" >Continue to stage 07 <span>↗</span></a></div></section><section class="chapter" id="stage-07" data-index="7"><div class="chapter-accent"><span class="chapter-num">07</span><span class="chapter-caption">MISSION / DEPENDENCIES</span><button type="button" class="done-button" data-mark="7" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 07 — Install Python dependencies in Colab</h2>
+<p>The notebook runs <code>%pip install -r .../space/requirements.txt</code>. This ensures the runtime contains Gradio, Smolagents, LiteLLM, boto3, requests, search dependencies and HTML parsing tools. Packages are installed within that Colab session; a runtime restart normally requires reinstalling.</p>
+<p><strong>Important versions in this project:</strong> <code>gradio==6.5.1</code> and <code>smolagents[litellm]==1.26.0</code>. They work with the UI component settings in this package. <strong>Gradio 6 does not accept <code>gr.Chatbot(type=&quot;messages&quot;)</code></strong>; the parameter was removed. Style settings such as CSS/theme are supplied to <code>launch()</code>, not the <code>Blocks()</code> constructor.</p>
+<p><strong>Checkpoint 07:</strong> <code>import gradio, smolagents, boto3, litellm</code> executes; no import traceback.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-08" class="next-step" >Continue to stage 08 <span>↗</span></a></div></section><section class="chapter" id="stage-08" data-index="8"><div class="chapter-accent"><span class="chapter-num">08</span><span class="chapter-caption">MISSION / COLAB SECRETS</span><button type="button" class="done-button" data-mark="8" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 08 — Add AWS credentials to Colab Secrets</h2>
+<p>On the Colab left toolbar, open the <strong>key-shaped Secrets panel</strong>. Add <strong>two separate secrets</strong>:</p>
+<table>
+<thead>
+<tr>
+  <th>Name (exact spelling)</th>
+  <th>Value</th>
+  <th>Notebook access?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>AWS_ACCESS_KEY_ID</code></td>
+  <td>your IAM access key ID</td>
+  <td><strong>On</strong></td>
+</tr>
+<tr>
+  <td><code>AWS_SECRET_ACCESS_KEY</code></td>
+  <td>its matching secret access key</td>
+  <td><strong>On</strong></td>
+</tr>
+<tr>
+  <td><code>AWS_SESSION_TOKEN</code></td>
+  <td>only if using temporary STS credentials</td>
+  <td>On if used</td>
+</tr>
+<tr>
+  <td><code>HF_TOKEN</code></td>
+  <td>your HF fine-grained write token, later</td>
+  <td>On if used</td>
+</tr>
+</tbody>
+</table>
+<p>The notebook securely retrieves these via <code>from google.colab import userdata</code>. It sets AWS environment variables for the current runtime; it should print <strong>only masked identity information</strong>, never the keys.</p>
+<p><strong>Checkpoint 08:</strong> No secret value appears in an output cell. You can demonstrate its presence via <code>bool(...)</code> rather than printing it.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-09" class="next-step" >Continue to stage 09 <span>↗</span></a></div></section><section class="chapter" id="stage-09" data-index="9"><div class="chapter-accent"><span class="chapter-num">09</span><span class="chapter-caption">MISSION / AWS IDENTITY</span><button type="button" class="done-button" data-mark="9" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 09 — Validate AWS authentication separately from authorization</h2>
+<p>Use <code>boto3.Session</code> with your credentials and <code>sts.get_caller_identity()</code> to test the signature. For example:</p>
+<pre><code class="language-python">import boto3
+from google.colab import userdata
+session = boto3.Session(
+    aws_access_key_id=userdata.get(&quot;AWS_ACCESS_KEY_ID&quot;),
+    aws_secret_access_key=userdata.get(&quot;AWS_SECRET_ACCESS_KEY&quot;),
+    region_name=&quot;us-east-1&quot;,
+)
+who = session.client(&quot;sts&quot;).get_caller_identity()
+print(&quot;AWS credentials accepted. Identity check succeeded.&quot;)
+</code></pre>
+<p>You must not print the full identity/account information into a public screenshot. A successful identity request establishes that credentials are recognized; <strong>it does not yet prove Bedrock inference permission</strong>.</p>
+<p><strong>If SignatureDoesNotMatch:</strong> check that the ID and secret belong to the same active pair; remove stray spaces, rotate stale keys, and refresh the boto3 Session after changes. Temporary credentials additionally require the session token.</p>
+<p><strong>Checkpoint 09:</strong> the identity request succeeds.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-10" class="next-step" >Continue to stage 10 <span>↗</span></a></div></section><section class="chapter" id="stage-10" data-index="10"><div class="chapter-accent"><span class="chapter-num">10</span><span class="chapter-caption">MISSION / MODEL TEST</span><button type="button" class="done-button" data-mark="10" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 10 — Make the first real DeepSeek V3.2 request</h2>
+<p>The notebook calls the Bedrock model using LiteLLM and a small token limit:</p>
+<pre><code class="language-python">from litellm import completion
+response = completion(
+    model=&quot;bedrock/deepseek.v3.2&quot;,
+    messages=[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Explain an AI agent in one sentence.&quot;}],
+    max_tokens=120,
+)
+print(response.choices[0].message.content)
+</code></pre>
+<p>This is the first <strong>potentially billable model request</strong>. If you see <code>AccessDeniedException</code>, check the IAM policy's action/resource and account/model onboarding. If you see an unsupported <code>stopSequences</code> error, see Stage 11 (that is a parameter issue, not an AWS access-key problem).</p>
+<p><strong>Checkpoint 10:</strong> a short model answer is returned with no traceback.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-11" class="next-step" >Continue to stage 11 <span>↗</span></a></div></section><section class="chapter" id="stage-11" data-index="11"><div class="chapter-accent"><span class="chapter-num">11</span><span class="chapter-caption">MISSION / STOP FIX</span><button type="button" class="done-button" data-mark="11" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 11 — Understand LiteLLM and the <code>stopSequences</code> fix</h2>
+<p><strong>LiteLLM</strong> is a compatibility layer. The same Smolagents <code>CodeAgent</code> can refer to an abstract model wrapper, but its requests still must conform to what the specific Bedrock model accepts.</p>
+<p>The working FLY backend configures:</p>
+<pre><code class="language-python">from smolagents import LiteLLMModel, REMOVE_PARAMETER
+import litellm
+litellm.drop_params = True
+model = LiteLLMModel(
+    model_id=&quot;bedrock/deepseek.v3.2&quot;,
+    max_tokens=1800,
+    stop=REMOVE_PARAMETER,
+)
+</code></pre>
+<p>In this exact tested stack, Smolagents may otherwise supply <code>stop</code> and LiteLLM maps it to Bedrock's unsupported <code>stopSequences</code> argument for DeepSeek V3.2. <code>REMOVE_PARAMETER</code> means <strong>omit the field entirely</strong>. An empty <code>stop=[]</code> still passes a field on some integrations. Do not remove this fix casually when upgrading dependencies.</p>
+<p><strong>Checkpoint 11:</strong> you can explain provider ID versus model ID, and why the special setting matters.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-12" class="next-step" >Continue to stage 12 <span>↗</span></a></div></section><section class="chapter" id="stage-12" data-index="12"><div class="chapter-accent"><span class="chapter-num">12</span><span class="chapter-caption">MISSION / AGENT INTERNALS</span><button type="button" class="done-button" data-mark="12" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 12 — Smolagents CodeAgent and tools (how the backend thinks)</h2>
+<p>Open <code>space/agent_backend.py</code>:</p>
+<ul>
+<li><code>LiteLLMModel</code> connects the model to AWS Bedrock using environment credentials.</li>
+<li><code>FLY_INSTRUCTIONS</code> defines <strong>Mode A: itinerary</strong> and <strong>Mode B: conversational follow-up</strong>.</li>
+<li><code>WebSearchTool(max_results=2)</code> can discover web information when current facts matter.</li>
+<li><code>VisitWebpageTool()</code> can read linked webpages when the agent chooses to use it.</li>
+<li><code>CodeAgent(..., max_steps=4)</code> limits its action loop; smaller limits can improve latency but sometimes prevent complex research.</li>
+<li><code>make_collaborative_travel_agent()</code> creates a <strong>fresh agent per request</strong> to prevent accidental reuse of one traveler's internal agent memory for another.</li>
+</ul>
+<p>The <code>CodeAgent</code> executes Python proposed by a language model. That creates additional security risk; require authentication, update dependencies, limit privileges, do not expose private tools or broad file/network access, and keep the app as a controlled educational demonstration rather than assuming model-generated code is intrinsically safe.</p>
+<pre><code class="language-python">agent = make_collaborative_travel_agent()
+answer = agent.run(&quot;MODE B - CONVERSATION. Recommend one quiet Kyoto place.&quot;, reset=True)
+</code></pre>
+<p><strong>Why <code>reset=True</code> can still support conversations:</strong> Gradio's session <code>State</code> stores the travel brief, original plan and recent dialogue, and injects relevant context into <em>new agent prompts</em>. The agent's own execution memory is intentionally fresh.</p>
+<p><strong>Checkpoint 12:</strong> You can explain <em>frontend state vs agent internal state</em>.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-13" class="next-step" >Continue to stage 13 <span>↗</span></a></div></section><section class="chapter" id="stage-13" data-index="13"><div class="chapter-accent"><span class="chapter-num">13</span><span class="chapter-caption">MISSION / PROFESSOR NOTEBOOK</span><button type="button" class="done-button" data-mark="13" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 13 — Understand the professor's notebook, cell by cell</h2>
+<blockquote>
+<p>The professor's original notebook has some cells not provided to this package. We only label the ones whose roles were verified from the project work. The <strong>standalone notebook in this repository uses its own sequential numbering</strong> and is intended to be self-contained.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+  <th>Original professor cell</th>
+  <th>Purpose</th>
+  <th>Keep / modify</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>5</td>
+  <td>AWS session / credentials setup</td>
+  <td>Configure securely; no hard-coded credentials</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>DeepSeek V3.2 via <code>LiteLLMModel</code></td>
+  <td>Keep <code>stop=REMOVE_PARAMETER</code></td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>Helper tools and user input tool</td>
+  <td>Maintain baseline dependencies and valid tool definitions</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>Baseline <code>travel_assistant_base</code></td>
+  <td>Preserve for before/after comparisons</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>Baseline Smolagents GradioUI</td>
+  <td>Test, collect evidence; Gradio version must match</td>
+</tr>
+<tr>
+  <td>11–12</td>
+  <td>Baseline replay / agent memory inspection</td>
+  <td>Analyze actions and tool calls</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td>Improved <code>collaborative_travel_assistant</code></td>
+  <td>Enforce R1–R4 and proper personalization</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td>Improved pink interactive Gradio UI</td>
+  <td>Intake, plans, follow-up conversations, optional images</td>
+</tr>
+<tr>
+  <td>19 and later</td>
+  <td>HF username, publication, reload, write-up</td>
+  <td>Must use a real <strong>Gradio Space</strong> for Python execution; Static Space holds source only</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Checkpoint 13:</strong> Baseline and improved agents use the same DeepSeek model for a fairer qualitative A/B experiment.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-14" class="next-step" >Continue to stage 14 <span>↗</span></a></div></section><section class="chapter" id="stage-14" data-index="14"><div class="chapter-accent"><span class="chapter-num">14</span><span class="chapter-caption">MISSION / HUMAN–AI UX</span><button type="button" class="done-button" data-mark="14" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 14 — R1–R4: what changed in the redesigned human–AI interaction</h2>
+<table>
+<thead>
+<tr>
+  <th>Requirement</th>
+  <th>User experience</th>
+  <th>Where implemented</th>
+  <th>How to test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>R1 Personalization</td>
+  <td>One setup brief, custom duration, typed interests</td>
+  <td>Gradio form and Mode A prompt</td>
+  <td>Enter <code>Custom → 2 weeks</code> plus typed interest, inspect snapshot</td>
+</tr>
+<tr>
+  <td>R2 Explainability</td>
+  <td>Reasons tied to interests, budget, pace</td>
+  <td><code>FLY_INSTRUCTIONS</code>, itinerary prompt</td>
+  <td>Check each major recommendation has a brief reason</td>
+</tr>
+<tr>
+  <td>R3 Useful visuals</td>
+  <td>Day-by-day plan and real destination information, optional images</td>
+  <td><code>app.py</code> Wikimedia enrichment</td>
+  <td>Preview (no AWS), verify photo source and links</td>
+</tr>
+<tr>
+  <td>R4 User control</td>
+  <td>Normal follow-up chat without rewriting the plan</td>
+  <td><code>chat_send</code>, <code>gr.State</code>, Mode B</td>
+  <td>Ask about Day 2 costs, verify original plan remains</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Microsoft HAI guideline links:</strong> G4 contextual relevance, G8 efficient dismissal, G9 efficient correction, G11 why/what explanation, G12 use recent interactions, G14 cautious adaptation. These are evaluation lenses, not automatic claims of violation; use real transcripts to determine whether the baseline actually fails.</p>
+<p><strong>Checkpoint 14:</strong> You can demonstrate the features in a fresh chat and a follow-up chat.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-15" class="next-step" >Continue to stage 15 <span>↗</span></a></div></section><section class="chapter" id="stage-15" data-index="15"><div class="chapter-accent"><span class="chapter-num">15</span><span class="chapter-caption">MISSION / GRADIO FRONTEND</span><button type="button" class="done-button" data-mark="15" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 15 — The Gradio UI: interface and event wiring</h2>
+<p>Open <code>space/app.py</code>. Key components:</p>
+<ol>
+<li><code>gr.Blocks(...)</code>: parent layout.</li>
+<li><code>gr.Textbox</code>, <code>gr.Dropdown</code>, <code>gr.CheckboxGroup</code>, <code>gr.Number</code>: travel inputs.</li>
+<li><code>gr.Chatbot</code>: the visible conversation.</li>
+<li><code>gr.State</code>: per-browser-session state with <code>built</code>, <code>snapshot</code>, <code>plan</code>, <code>dialogue</code>.</li>
+<li><code>.click(...)</code> and <code>.submit(...)</code>: <strong>event bindings</strong> between buttons and Python functions.</li>
+<li><code>build_trip(...)</code>: validates preferences, streams a loading state, calls the model, shows the result, then looks up images.</li>
+<li><code>chat_send(...)</code>: appends a question to chat history, calls the model in Mode B, returns a focused answer, preserves the plan.</li>
+<li><code>reset(...)</code>: resets both the form and session state.</li>
+<li><code>fly_demo.queue(default_concurrency_limit=1)</code>: allows streaming <code>yield</code> updates, reduces concurrent expensive requests within a process.</li>
+</ol>
+<p>The hosted Space launches with <code>share=False</code>, because the Hugging Face app already has a public/protected URL; the local Colab launch can use <code>share=True</code>. With Gradio 6.5.1, <code>theme</code> and <code>css</code> belong to <code>.launch()</code>; don't pass <code>type=&quot;messages&quot;</code> to <code>gr.Chatbot</code>.</p>
+<p><strong>Why there are animated progress indicators:</strong> a model request may take seconds or longer. The generator yields a visible status before calling the agent, and another status before optional image lookup. The animation is feedback, <strong>not an accurate percent completion</strong>.</p>
+<p><strong>Checkpoint 15:</strong> Preview (no AWS) and reset work without invoking DeepSeek; Generate and Send work with configured AWS credentials.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-16" class="next-step" >Continue to stage 16 <span>↗</span></a></div></section><section class="chapter" id="stage-16" data-index="16"><div class="chapter-accent"><span class="chapter-num">16</span><span class="chapter-caption">MISSION / IMAGES &AMP; LINKS</span><button type="button" class="done-button" data-mark="16" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 16 — Images, links and cautious factual claims</h2>
+<p>The app uses independent media lookups—<strong>the language model does not supply trusted image URLs</strong>.</p>
+<ul>
+<li>Model returns readable Markdown and may include a small <code>places</code> code block listing actual recommended attractions.</li>
+<li><code>_separate_places</code> parses and hides that block, and <code>_place_visuals</code> requests Wikipedia/Wikimedia information independently.</li>
+<li>A fallback search strategy normalizes alternative spellings and diacritics to improve matching.</li>
+<li>Photo URLs are constrained to Wikimedia hosts; article URLs to Wikipedia hosts.</li>
+<li>Google Maps <strong>search</strong> links are generated for relevant place names; they are not verified reservations or directions.</li>
+<li>If no verified photograph is available, the itinerary still displays. The UI must never claim a photograph was verified by the model alone.</li>
+</ul>
+<p>Photos can fail because of rate limiting, network policy, missing PageImages, alternate names or browser blocking. <strong>No photo</strong> is safer than an unrelated or fabricated photo.</p>
+<p><strong>Checkpoint 16:</strong> A travel plan is usable even when image lookup fails; the UI can show an honest fallback status.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-17" class="next-step" >Continue to stage 17 <span>↗</span></a></div></section><section class="chapter" id="stage-17" data-index="17"><div class="chapter-accent"><span class="chapter-num">17</span><span class="chapter-caption">MISSION / LOCAL VERIFICATION</span><button type="button" class="done-button" data-mark="17" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 17 — Local end-to-end test before hosting</h2>
+<p>Run the notebook's <strong>local Gradio launch</strong> after model authentication works. If you imported <code>app.py</code> from <code>space/</code>, you are testing the <em>same</em> backend that Hugging Face will run.</p>
+<p>Test this sequence:</p>
+<ol>
+<li>Click <strong>Preview (no AWS)</strong> and check the page renders and results appear.</li>
+<li>Choose <strong>Kyoto</strong> from the example buttons.</li>
+<li>Verify <code>Custom</code> duration is editable and both selected + typed interests are passed.</li>
+<li>Click <strong>Design my journey</strong>; confirm itinerary is day-by-day and tailored.</li>
+<li>Ask <strong>“Could Day 2 be quieter and less expensive?”</strong> in Send; it should answer the specific question, not rewrite the whole trip.</li>
+<li>Click <strong>Start over</strong> and confirm there is no retained trip information.</li>
+<li>Repeat with a different destination, and preserve before/after evidence for your assignment.</li>
+</ol>
+<p><strong>Checkpoint 17:</strong> app works locally and evidence is recorded. The Gradio URL from Colab is temporary and may stop after the runtime closes.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-18" class="next-step" >Continue to stage 18 <span>↗</span></a></div></section><section class="chapter" id="stage-18" data-index="18"><div class="chapter-accent"><span class="chapter-num">18</span><span class="chapter-caption">MISSION / HF TOKEN</span><button type="button" class="done-button" data-mark="18" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 18 — Create the Hugging Face fine-grained token</h2>
+<ol>
+<li>Open <a href="https://huggingface.co/settings/tokens">https://huggingface.co/settings/tokens</a> .</li>
+<li>Select a <strong>fine-grained</strong> token, name it e.g. <code>Fly-Course-Deploy</code>.</li>
+<li>Grant only the necessary permission to write repositories under <strong>your personal namespace</strong> (or scope it to this Space when available). Extra model inference permissions are not needed because this project calls AWS Bedrock.</li>
+<li>Copy it once; save it in <strong>Colab Secrets → HF_TOKEN</strong>, enable notebook access.</li>
+<li>Run the notebook's HF authentication cell and confirm the correct account username. <strong>Do not print the token.</strong></li>
+</ol>
+<p><strong>Checkpoint 18:</strong> authentication succeeds; username is correct; no token is displayed in output.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-19" class="next-step" >Continue to stage 19 <span>↗</span></a></div></section><section class="chapter" id="stage-19" data-index="19"><div class="chapter-accent"><span class="chapter-num">19</span><span class="chapter-caption">MISSION / GRADIO SPACE</span><button type="button" class="done-button" data-mark="19" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 19 — Create a real Gradio Space using PRO</h2>
+<ol>
+<li>Open <a href="https://huggingface.co/new-space">https://huggingface.co/new-space</a> or use your own Spaces screen → <strong>Create new Space</strong>.</li>
+<li>Space name <code>haii-fly-travel-live</code> or your own. Choose <strong>Gradio</strong>, not Static HTML; use <strong>CPU Basic</strong> (the model runs on AWS). Choose <strong>Private</strong> while testing. You can later consider Protected/Public with appropriate app authentication and usage limits.</li>
+<li>Confirm the user/account has the needed PRO subscription for CPU Gradio Space creation.</li>
+<li>Create the Space using the website <strong>or</strong> let the included Colab publishing cell create/reuse it. <strong>Do not create a Static Space at the same ID.</strong></li>
+<li>In the <strong>root of the Space</strong> you need <code>app.py</code>, <code>agent_backend.py</code>, <code>requirements.txt</code>, <code>README.md</code>. Do <em>not</em> upload the whole GitHub repo root to the Space: files must be at the root of the Space repository.</li>
+</ol>
+<p><strong>Checkpoint 19:</strong> the Space's Files tab shows these exact four files at root, and the README YAML says <code>sdk: gradio</code>, <code>app_file: app.py</code>. A <code>short_description</code> longer than 60 characters is rejected with HTTP 400; the included README has already been corrected and validated.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-20" class="next-step" >Continue to stage 20 <span>↗</span></a></div></section><section class="chapter" id="stage-20" data-index="20"><div class="chapter-accent"><span class="chapter-num">20</span><span class="chapter-caption">MISSION / SPACE SECRETS</span><button type="button" class="done-button" data-mark="20" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 20 — Configure Hugging Face Space Secrets (different from Colab)</h2>
+<p>Open <strong>Space → Settings → Variables and secrets</strong>. Add:</p>
+<table>
+<thead>
+<tr>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Secret</td>
+  <td><code>AWS_ACCESS_KEY_ID</code></td>
+  <td>matching IAM key ID</td>
+</tr>
+<tr>
+  <td>Secret</td>
+  <td><code>AWS_SECRET_ACCESS_KEY</code></td>
+  <td>matching IAM secret</td>
+</tr>
+<tr>
+  <td>Variable</td>
+  <td><code>AWS_REGION</code></td>
+  <td><code>us-east-1</code>, if enabled</td>
+</tr>
+<tr>
+  <td>Secret</td>
+  <td><code>FLY_APP_PASSWORD</code></td>
+  <td>long unique visitor password</td>
+</tr>
+<tr>
+  <td>Secret, optional</td>
+  <td><code>FLY_APP_USER</code></td>
+  <td><code>traveler</code> or your chosen name</td>
+</tr>
+<tr>
+  <td>Secret, conditional</td>
+  <td><code>AWS_SESSION_TOKEN</code></td>
+  <td>only when using temporary AWS credentials</td>
+</tr>
+</tbody>
+</table>
+<p>Changing secrets/variables typically restarts the application. Do not put them into repo files, README, GitHub issue, screenshots, or the public chat. The app reads these environment variables at runtime. <strong>Private Space</strong> access is different from <strong>in-app password</strong> access; a Protected Space's hosted app may be reachable even when source is private, so authentication still matters.</p>
+<p><strong>Checkpoint 20:</strong> Space now has the required keys visible <em>by name</em>, without exposing their values. Preview works; a real AI request succeeds.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-21" class="next-step" >Continue to stage 21 <span>↗</span></a></div></section><section class="chapter" id="stage-21" data-index="21"><div class="chapter-accent"><span class="chapter-num">21</span><span class="chapter-caption">MISSION / PUBLISH SOURCE</span><button type="button" class="done-button" data-mark="21" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 21 — Publish files through Google Colab (no manual ZIP surgery)</h2>
+<p>Use the notebook's HF deploy cell: it reads <strong>your cloned GitHub repo's <code>space/</code> folder</strong>, confirms SDK/metadata, creates or reuses the correct Gradio Space, and uploads the four files. It refuses to overwrite a Static Space. Code is published, then Hugging Face builds the app automatically.</p>
+<blockquote>
+<p>Tip: The notebook's publishing step requires valid <code>HF_TOKEN</code>. It does not send AWS secrets to Hugging Face; you add those separately in the Space Settings.</p>
+</blockquote>
+<p>After upload, open the Space → <strong>Files</strong> and then <strong>App</strong>. If the app shows <strong>Building</strong>, inspect build logs. If it shows <strong>Running</strong>, sign in (if password configured) and run Preview + Generate + Send. Success means the app is actually responding, not merely that the files were uploaded.</p>
+<p><strong>Checkpoint 21:</strong> Hosted app works even after you close Google Colab.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-22" class="next-step" >Continue to stage 22 <span>↗</span></a></div></section><section class="chapter" id="stage-22" data-index="22"><div class="chapter-accent"><span class="chapter-num">22</span><span class="chapter-caption">MISSION / OPERATE SAFELY</span><button type="button" class="done-button" data-mark="22" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 22 — Deployment health, log triage, costs and updates</h2>
+<p><strong>Where to look:</strong> Space → <strong>Logs → Build</strong> for package installation errors; <strong>Logs → Container</strong> for Python startup/model/tool failures.</p>
+<p><strong>Deploy a new version:</strong> modify GitHub source → run <code>tests/test_repository.py</code> and UI mock tests → commit → rerun the notebook upload cell → watch Space rebuild → test Preview and Generate. A GitHub commit by itself does <strong>not</strong> automatically update the HF Space unless you set up explicit synchronization.</p>
+<p><strong>Privacy:</strong> the app stores the travel session in Gradio state, not a permanent customer database. Users should avoid entering health, identity or other sensitive personal data. The model sees relevant travel preferences and prior itinerary as prompt content.</p>
+<p><strong>Cost model:</strong> actual spend depends on Bedrock input/output tokens, whether web tools add more model steps, number of visitors, account quotas, and the chosen HF hardware. Avoid quoting invented per-query prices. Configure budgets and monitor. PRO is separate from Bedrock billing.</p>
+<p><strong>Checkpoint 22:</strong> You can rebuild the app, identify a failed deployment stage, and recover without exposing secrets.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-23" class="next-step" >Continue to stage 23 <span>↗</span></a></div></section><section class="chapter" id="stage-23" data-index="23"><div class="chapter-accent"><span class="chapter-num">23</span><span class="chapter-caption">MISSION / GITHUB PAGES</span><button type="button" class="done-button" data-mark="23" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 23 — Put the animated documentation on GitHub Pages</h2>
+<p>This repository ships a standalone animated website at <strong><code>docs/index.html</code></strong>, with no API calls and no credentials.</p>
+<ol>
+<li>Push this GitHub repo, then open <strong>GitHub → Repository Settings → Pages</strong>.</li>
+<li>Under <strong>Build and deployment</strong> select <strong>Deploy from a branch</strong>.</li>
+<li>Select branch <strong>main</strong>, folder <strong>/docs</strong>, then Save.</li>
+<li>After GitHub finishes its Pages build, visit the site URL GitHub shows. The site usually follows a pattern such as <code>https://YOUR_GITHUB_USERNAME.github.io/fly-collaborative-travel-agent/</code>.</li>
+<li>GitHub Pages content is normally publicly accessible; <strong>never put AWS or HF secrets inside docs</strong>.</li>
+</ol>
+<p><strong>Checkpoint 23:</strong> you can navigate the interactive chapters, see animated progress indicators, search headings, mark checklist steps and follow architecture links.</p>
+<p>Official GitHub reference: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site</a></p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-24" class="next-step" >Continue to stage 24 <span>↗</span></a></div></section><section class="chapter" id="stage-24" data-index="24"><div class="chapter-accent"><span class="chapter-num">24</span><span class="chapter-caption">MISSION / ASSIGNMENT EVIDENCE</span><button type="button" class="done-button" data-mark="24" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 24 — Your assignment's scientific evaluation: baseline vs improved</h2>
+<p>Keep the professor's baseline agent unchanged and test both agents with <strong>identical prompts</strong>. Record authentic outputs, rather than writing idealized answers and calling them evidence.</p>
+<table>
+<thead>
+<tr>
+  <th>Test</th>
+  <th>Input</th>
+  <th>Metric</th>
+  <th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Information burden</td>
+  <td>Kyoto 4-day trip</td>
+  <td>Number of unsolicited questions, words, time</td>
+  <td>R1/G4</td>
+</tr>
+<tr>
+  <td>Rationale</td>
+  <td>Same Kyoto prompt</td>
+  <td>Number/proportion of named stops with explicit reason</td>
+  <td>R2/G11</td>
+</tr>
+<tr>
+  <td>Practical output</td>
+  <td>Same prompt</td>
+  <td>Real locations, grounded links, available photos</td>
+  <td>R3/G4</td>
+</tr>
+<tr>
+  <td>Correction</td>
+  <td>“Actually, I want a central location…”</td>
+  <td>Preservation of unchanged constraints</td>
+  <td>R4/G9/G12/G14</td>
+</tr>
+</tbody>
+</table>
+<p>Include at least <strong>three empirical comparisons</strong> per your assignment requirements, using timestamps, actual transcripts and a small method section (same model, equal tools when appropriate, same prompts, same response budget where possible). Note that two AI runs can differ without code changes, and performance improvement cannot be declared from one cherry-picked run. For stronger evidence, repeat with several prompts and assess reliability. Do <strong>not</strong> use Preview's demo plan as actual model evidence.</p>
+<p><strong>Checkpoint 24:</strong> You can explain where each reported improvement was observed and where uncertainty remains.</p>
+<hr />
+</div><div class="chapter-bottom"><a href="#stage-25" class="next-step" >Continue to stage 25 <span>↗</span></a></div></section><section class="chapter" id="stage-25" data-index="25"><div class="chapter-accent"><span class="chapter-num">25</span><span class="chapter-caption">MISSION / FINAL DELIVERY</span><button type="button" class="done-button" data-mark="25" aria-pressed="false">Mark complete ✓</button></div><div class="prose"><h2>Stage 25 — Final delivery, demonstration, and maintenance</h2>
+<p>Your project is complete for demonstration when:</p>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>GitHub repository contains <code>space/</code>, <code>notebooks/</code>, <code>docs/</code>, <code>tests/</code>, and this tutorial.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Automated static tests pass, and no credentials are in the repository.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Colab can authenticate to AWS, invoke DeepSeek, and run the pink demo (or your original notebook still does so).</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Hugging Face Space is a <strong>Gradio</strong> Space, not Static HTML.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Space's AWS credentials, region and app password are set privately.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Hosted Preview works and real itinerary generation succeeds.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Hosted chat answers follow-ups without automatically rebuilding the full plan.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Photo fallback is honest if Wikimedia has no image.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Cost/security controls and demo account sharing are documented.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>GitHub Pages documentation works on desktop/mobile.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>The professor's required before/after evidence and write-up are saved separately.</li>
+</ul>
+<hr />
+<h2>Appendix A — Troubleshooting by error message</h2>
+<table>
+<thead>
+<tr>
+  <th>Exact symptom</th>
+  <th>Likely cause</th>
+  <th>Corrective action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>SignatureDoesNotMatch</code></td>
+  <td>Wrong AWS key pair / stale session</td>
+  <td>Update both secrets; temporary credentials also need session token; restart session/client</td>
+</tr>
+<tr>
+  <td><code>AccessDeniedException ... bedrock:InvokeModel</code></td>
+  <td>IAM missing / wrong resource / model access</td>
+  <td>Review targeted IAM policy, region, model availability and enablement</td>
+</tr>
+<tr>
+  <td><code>This model doesn't support stopSequences</code></td>
+  <td>Smolagents/LiteLLM sends unsupported stop</td>
+  <td>Preserve <code>stop=REMOVE_PARAMETER</code> in the tested stack</td>
+</tr>
+<tr>
+  <td><code>Chatbot.__init__ ... type</code></td>
+  <td>Gradio 6 constructor changed</td>
+  <td>Remove <code>type=&quot;messages&quot;</code>; pin project version</td>
+</tr>
+<tr>
+  <td><code>gradio.components has no attribute Component</code></td>
+  <td>Inconsistent Gradio installation/imports</td>
+  <td>Reinstall pinned compatible versions and restart runtime</td>
+</tr>
+<tr>
+  <td><code>402 Payment Required</code> when creating Gradio Space</td>
+  <td>No qualifying paid HF plan</td>
+  <td>Verify PRO is on the authenticated HF account; Static Space isn't a Python host</td>
+</tr>
+<tr>
+  <td><code>short_description length &lt;= 60</code></td>
+  <td>Invalid Space README YAML</td>
+  <td>Use included validated <code>space/README.md</code></td>
+</tr>
+<tr>
+  <td>Space published but Python app doesn't run</td>
+  <td>SDK is <code>static</code> or files not at repo root</td>
+  <td>Use <strong>Gradio</strong> Space and correct root files</td>
+</tr>
+<tr>
+  <td>“Fly is not yet connected to AWS”</td>
+  <td>HF Space lacks credential secrets</td>
+  <td>Add them under <strong>Space Settings → Secrets</strong>, then restart</td>
+</tr>
+<tr>
+  <td>Images missing</td>
+  <td>Wikimedia lookup/network/matching failed</td>
+  <td>Test Preview; check image logs; don't invent URLs</td>
+</tr>
+<tr>
+  <td>Space seems to run forever in Colab</td>
+  <td><code>debug=True</code> blocks / server thread</td>
+  <td>Stop the running cell; prefer non-blocking local launch for notebook workflow</td>
+</tr>
+<tr>
+  <td><code>CodeAgent.from_hub</code> returns 404</td>
+  <td>Space missing / no uploaded <code>agent.json</code> / private access</td>
+  <td>Confirm repo exists, correct type, authorization; app publishing is not same as serialized agent source</td>
+</tr>
+<tr>
+  <td>“refused to connect” in Static Space</td>
+  <td>Hugging Face page blocked within iframe</td>
+  <td>Open repository directly in a new tab; deploy a real Gradio Space for chat</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Appendix B — Quick commands and links</h2>
+<pre><code class="language-text">GitHub repository:       https://github.com/YOUR_GITHUB_USERNAME/fly-collaborative-travel-agent
+GitHub Pages:            https://YOUR_GITHUB_USERNAME.github.io/fly-collaborative-travel-agent/
+Hugging Face live app:   https://huggingface.co/spaces/YOUR_HF_USERNAME/haii-fly-travel-live
+HF Access Tokens:        https://huggingface.co/settings/tokens
+AWS IAM:                 https://console.aws.amazon.com/iam/
+Amazon Bedrock:          https://console.aws.amazon.com/bedrock/
+AWS Billing/Budgets:     https://console.aws.amazon.com/billing/home
+Colab:                   https://colab.research.google.com/
+</code></pre>
+<p>All account-specific URLs above are <em>patterns</em>, not promises that your repository exists or is visible to everyone.</p>
+<h2>Appendix C — Official reference links</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-deepseek-deepseek-v3-2.html">AWS Bedrock DeepSeek V3.2</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html">AWS model access guidance</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">AWS least-privilege IAM</a></li>
+<li><a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html">AWS Budgets</a></li>
+<li><a href="https://huggingface.co/docs/hub/spaces-sdks-gradio">Hugging Face Gradio Spaces</a></li>
+<li><a href="https://huggingface.co/docs/hub/spaces-overview">Hugging Face Spaces Overview</a></li>
+<li><a href="https://huggingface.co/docs/huggingface_hub/main/guides/upload">Hugging Face repository upload</a></li>
+<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub Pages publishing</a></li>
+<li><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2019/01/Guidelines-for-Human-AI-Interaction-camera-ready.pdf">Microsoft Guidelines for Human–AI Interaction (PDF)</a></li>
+</ul>
+<p><strong>End of hands-on tutorial.</strong> For a deeper explanation of each software component and the original assignment analysis, read <code>docs/COMPLETE_TECHNICAL_REFERENCE.md</code> and <code>docs/CELL_BY_CELL.md</code>.</p>
+</div><div class="chapter-bottom"><a href="#stage-26" class="next-step" hidden>Continue to stage 26 <span>↗</span></a></div></section>
+  <footer>FLY ACADEMY · An open, practical AI engineering guide. <a href="TROUBLESHOOTING.md">Troubleshooting</a> · <a href="HAI_EVALUATION.md">Evaluation</a> · <a href="ARCHITECTURE_AND_BACKEND.md">Architecture</a><p class="site-credit">© 2026 FLY · Crafted by <a href="https://arharif.github.io/about-x1" target="_blank" rel="noopener noreferrer" aria-label="Visit @arharif About X1">@arharif ↗</a></p><p>This animated tutorial is static HTML. AWS keys and HF tokens must never be embedded here.</p></footer>
+</main>
+</div>
+<script>
+(()=>{
+'use strict';
+const nav=document.getElementById('stage-nav'), sidebar=document.getElementById('sidebar');
+// GitHub Pages serves only /docs; point source links back to the GitHub repo.
+if(location.hostname.endsWith('.github.io')){
+ const owner=location.hostname.split('.')[0], repo=location.pathname.split('/').filter(Boolean)[0];
+ if(owner && repo){
+   document.getElementById('notebook-repo-link').href=`https://github.com/${owner}/${repo}/blob/main/notebooks/FLY_From_Zero_to_Hugging_Face_PRO.ipynb`;
+   document.getElementById('app-repo-link').href=`https://github.com/${owner}/${repo}/blob/main/space/app.py`;
+ }
+}
+const links=[...document.querySelectorAll('.stage-link')];
+const chapters=[...document.querySelectorAll('.chapter')];
+const progress=document.getElementById('scroll-progress');
+const completedCount=document.getElementById('completed-count');
+const fill=document.getElementById('completed-progress');
+const storageKey='fly-learning-checklist-v1';
+let done=new Set();try{done=new Set(JSON.parse(localStorage.getItem(storageKey)||'[]'));}catch(e){}
+function renderDone(){document.querySelectorAll('[data-mark]').forEach(btn=>{const yes=done.has(Number(btn.dataset.mark));btn.setAttribute('aria-pressed',String(yes));btn.textContent=yes?'Completed ✓':'Mark complete ✓'});links.forEach(link=>link.classList.toggle('done',done.has(Number(link.dataset.stage))));completedCount.textContent=done.size+' / 26';fill.style.width=(100*done.size/26)+'%';try{localStorage.setItem(storageKey,JSON.stringify([...done]));}catch(e){}}
+document.querySelectorAll('[data-mark]').forEach(b=>b.addEventListener('click',()=>{const i=Number(b.dataset.mark);done.has(i)?done.delete(i):done.add(i);renderDone()}));renderDone();
+const search=document.getElementById('stage-search');search.addEventListener('input',()=>{const q=search.value.toLowerCase().trim();links.forEach(a=>{a.style.display=a.textContent.toLowerCase().includes(q)?'flex':'none'})});
+const menu=document.getElementById('menu-btn');menu.addEventListener('click',()=>{let open=!sidebar.classList.contains('show');sidebar.classList.toggle('show',open);menu.setAttribute('aria-expanded',String(open))});
+links.forEach(a=>a.addEventListener('click',()=>{sidebar.classList.remove('show');menu.setAttribute('aria-expanded','false')}));
+function paintScroll(){const body=document.documentElement;const max=Math.max(1,body.scrollHeight-body.clientHeight);progress.style.width=Math.max(0,Math.min(100,100*scrollY/max))+'%'}window.addEventListener('scroll',paintScroll,{passive:true});paintScroll();
+const observer=new IntersectionObserver(entries=>{const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);if(visible.length){const i=Number(visible[0].target.dataset.index);links.forEach(a=>a.classList.toggle('active',Number(a.dataset.stage)===i))}},{rootMargin:'-12% 0px -65% 0px'});chapters.forEach(c=>observer.observe(c));
+document.querySelectorAll('pre').forEach(pre=>{const btn=document.createElement('button');btn.type='button';btn.textContent='Copy';btn.className='copy-code';btn.setAttribute('aria-label','Copy code example');pre.appendChild(btn);btn.addEventListener('click',async()=>{const val=pre.querySelector('code')?.innerText||pre.innerText.replace(/Copy$/,'');try{await navigator.clipboard.writeText(val);btn.textContent='Copied ✓'}catch(e){btn.textContent='Select & copy'}setTimeout(()=>btn.textContent='Copy',1400)})});
+})();
+</script>
+<script src="assets/themes.js" defer></script>
+</body>
+</html>

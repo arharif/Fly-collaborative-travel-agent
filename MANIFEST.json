@@ -1,0 +1,139 @@
+{
+  "project": "FLY Collaborative Travel Agent",
+  "edition": "2026-10-24 visual refresh",
+  "file_count": 33,
+  "files": [
+    {
+      "path": ".env.example",
+      "bytes": 266
+    },
+    {
+      "path": ".github/workflows/repository-checks.yml",
+      "bytes": 450
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 280
+    },
+    {
+      "path": "README.md",
+      "bytes": 6541
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "bytes": 3041
+    },
+    {
+      "path": "VISUAL_REFRESH_GUIDE.md",
+      "bytes": 1199
+    },
+    {
+      "path": "docs/.nojekyll",
+      "bytes": 0
+    },
+    {
+      "path": "docs/ARCHITECTURE_AND_BACKEND.md",
+      "bytes": 4842
+    },
+    {
+      "path": "docs/CELL_BY_CELL.md",
+      "bytes": 3063
+    },
+    {
+      "path": "docs/COMPLETE_TECHNICAL_REFERENCE.md",
+      "bytes": 89041
+    },
+    {
+      "path": "docs/COMPLETE_TECHNICAL_REFERENCE.pdf",
+      "bytes": 511126
+    },
+    {
+      "path": "docs/FLY_Zero_to_Hugging_Face_PRO_Tutorial.pdf",
+      "bytes": 140933
+    },
+    {
+      "path": "docs/HAI_EVALUATION.md",
+      "bytes": 2375
+    },
+    {
+      "path": "docs/TROUBLESHOOTING.md",
+      "bytes": 3244
+    },
+    {
+      "path": "docs/TUTORIAL_FROM_ZERO.md",
+      "bytes": 36306
+    },
+    {
+      "path": "docs/VISUAL_THEMES_AND_BRANDING.md",
+      "bytes": 1677
+    },
+    {
+      "path": "docs/assets/fly-readme-hero.svg",
+      "bytes": 2800
+    },
+    {
+      "path": "docs/assets/themes.css",
+      "bytes": 11366
+    },
+    {
+      "path": "docs/assets/themes.js",
+      "bytes": 1345
+    },
+    {
+      "path": "docs/index.html",
+      "bytes": 81022
+    },
+    {
+      "path": "notebooks/FLY_From_Zero_to_Hugging_Face_PRO.ipynb",
+      "bytes": 19723
+    },
+    {
+      "path": "notebooks/Professor_Cell_14_Reference.py",
+      "bytes": 4151
+    },
+    {
+      "path": "notebooks/Professor_Cell_16_Reference.py",
+      "bytes": 25746
+    },
+    {
+      "path": "space/README.md",
+      "bytes": 1002
+    },
+    {
+      "path": "space/agent_backend.py",
+      "bytes": 4180
+    },
+    {
+      "path": "space/app.py",
+      "bytes": 33218
+    },
+    {
+      "path": "space/requirements.txt",
+      "bytes": 151
+    },
+    {
+      "path": "tests/.pytest_cache/.gitignore",
+      "bytes": 37
+    },
+    {
+      "path": "tests/.pytest_cache/CACHEDIR.TAG",
+      "bytes": 191
+    },
+    {
+      "path": "tests/.pytest_cache/README.md",
+      "bytes": 302
+    },
+    {
+      "path": "tests/.pytest_cache/v/cache/nodeids",
+      "bytes": 2
+    },
+    {
+      "path": "tests/test_repository.py",
+      "bytes": 2751
+    },
+    {
+      "path": "tests/test_ui_mock.py",
+      "bytes": 2689
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+gradio==6.5.1
+smolagents[litellm]==1.26.0
+litellm>=1.75.0,<2
+boto3>=1.35,<2
+requests>=2.31,<3
+beautifulsoup4>=4.12,<5
+markdownify>=0.13,<2
+ddgs>=9,<11

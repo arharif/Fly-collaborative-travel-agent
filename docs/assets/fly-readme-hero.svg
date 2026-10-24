@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-label="FLY collaborative AI travel concierge, a smarter way to explore">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#F9E7F0"/><stop offset="0.56" stop-color="#F4EEF0"/><stop offset="1" stop-color="#EEF8F2"/></linearGradient>
+    <linearGradient id="green" x1="0" x2="1"><stop stop-color="#206C4C"/><stop offset="1" stop-color="#56A678"/></linearGradient>
+    <filter id="shadow"><feGaussianBlur stdDeviation="21"/></filter>
+  </defs>
+  <rect width="1200" height="420" rx="32" fill="url(#bg)"/>
+  <circle cx="973" cy="207" r="168" fill="#E6F1E8" opacity=".8"/>
+  <circle cx="1094" cy="101" r="90" fill="#F7D7E6" opacity=".75"/>
+  <path d="M710 355 C820 340 760 79 964 98 S1190 202 1100 280" fill="none" stroke="#C597AC" stroke-width="2.5" stroke-dasharray="7 12" opacity=".78"/>
+  <path d="M710 355 C820 340 760 79 964 98 S1190 202 1100 280" fill="none" stroke="#6C9C7D" stroke-width="4" stroke-linecap="round" stroke-dasharray="120 1200" opacity=".76">
+    <animate attributeName="stroke-dashoffset" values="320;-900" dur="16s" repeatCount="indefinite"/>
+  </path>
+  <g transform="translate(900 115)">
+    <rect x="0" y="0" width="174" height="174" rx="50" fill="#FFFFFF" opacity=".95"/>
+    <path d="M42 83 L131 36 L109 133 L87 98 L64 112 L72 91 Z" fill="none" stroke="#1F2822" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M72 91 L131 36 L87 98" fill="none" stroke="#1F2822" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="133" cy="140" r="7" fill="url(#green)"><animate attributeName="opacity" values=".35;1;.35" dur="3.8s" repeatCount="indefinite"/></circle>
+    <animateTransform attributeName="transform" type="translate" values="900 115;900 102;900 115" dur="6s" repeatCount="indefinite"/>
+  </g>
+  <text x="77" y="70" fill="#284A36" font-family="Arial,Helvetica,sans-serif" font-size="17" letter-spacing="3" font-weight="700">FLY  /  AI TRAVEL STUDIO</text>
+  <text x="73" y="212" fill="#1D1B1E" font-family="Arial,Helvetica,sans-serif" font-size="118" font-weight="750" letter-spacing="-10">Go further.</text>
+  <text x="78" y="285" fill="#5B535B" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="400" letter-spacing="-1">Travel thoughtfully, with an AI concierge.</text>
+  <rect x="77" y="328" width="137" height="43" rx="22" fill="#1D1B1E"/>
+  <text x="99" y="355" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">LEARN  →</text>
+  <rect x="229" y="328" width="120" height="43" rx="22" fill="#D6EEDC"/>
+  <text x="250" y="355" fill="#1C5032" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">BUILD  ↗</text>
+</svg>
