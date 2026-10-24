@@ -1,16 +1,63 @@
+
 <div align="center">
 
-<img src="docs/assets/fly-readme-hero.svg" alt="FLY — A smarter way to explore, learn, build and deploy" width="100%" />
+<br>
 
-### ✈️ FLY — Collaborative AI Travel Concierge
+### FLY TRAVEL AI Agent
 
-**A thoughtful travel-planning assistant, built with real cloud infrastructure.**
+# ✈️ FLY — Travel, thoughtfully designed.
 
-[🌸 **Interactive Academy**](https://arharif.github.io/Fly-collaborative-travel-agent/) · [🚀 **Build from zero**](docs/TUTORIAL_FROM_ZERO.md) · [📓 **Run in Colab**](notebooks/FLY_From_Zero_to_Hugging_Face_PRO.ipynb) · [💬 **Gradio application**](space/)
+**Your personal AI travel concierge.**
 
-<sub>Personalized journeys · Conversational planning · AWS Bedrock + DeepSeek V3.2 · Hugging Face PRO</sub>
+<br>
+
+<a href="https://arharif.github.io/Fly-collaborative-travel-agent/">
+  <img
+    src="https://img.shields.io/badge/EXPLORE-INTERACTIVE%20ACADEMY-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=3B0764"
+    alt="Explore Interactive Academy"
+    height="46"
+  />
+</a>
+
+<br>
+<br>
+
+<table>
+  <tr>
+    <td align="center" width="220">
+      <a href="docs/TUTORIAL_FROM_ZERO.md">
+        <strong>📖 Learn</strong>
+      </a>
+      <br>
+      <sub>Tutorials</sub>
+    </td>
+    <td align="center" width="220">
+      <a href="notebooks/FLY_From_Zero_to_Hugging_Face_PRO.ipynb">
+        <strong>📓 Build</strong>
+      </a>
+      <br>
+      <sub>Google Colab</sub>
+    </td>
+    <td align="center" width="220">
+      <a href="space/">
+        <strong>💬 Explore</strong>
+      </a>
+      <br>
+      <sub>Gradio Application</sub>
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<sub>
+  <a href="https://arharif.github.io/about-x1">
+    © arharif
+  </a>
+</sub>
 
 </div>
+
 
 ---
 
